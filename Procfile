@@ -1,1 +1,1 @@
-web: npm run nonexistent-failing-script
+web: npm run start-prod

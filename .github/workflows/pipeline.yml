@@ -32,6 +32,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pokedex-banaanihillo
           heroku_email: banaanihillo@protonmail.ch
+          healthcheck: http://pokedex-banaanihillo.herokuapp.com/health
+          checkstring: OK
 
       # Runs a single command using the runners shell
       - name: npm install

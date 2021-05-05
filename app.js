@@ -9,3 +9,11 @@ app.use(express.static('dist'))
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
 })
+
+app.get('health', (_request, response) => {
+  response.send('OK')
+})
+
+app.get('version', (_request, response) => {
+  response.send("Version?")
+})

@@ -15,5 +15,5 @@ app.get('/health', (_request, response) => {
 })
 
 app.get('/version', (_request, response) => {
-  response.send("Version?")
+  response.send('iunno')
 })

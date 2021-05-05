@@ -10,10 +10,10 @@ app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
 })
 
-app.get('health', (_request, response) => {
+app.get('/health', (_request, response) => {
   response.send('OK')
 })
 
-app.get('version', (_request, response) => {
+app.get('/version', (_request, response) => {
   response.send("Version?")
 })

@@ -18,6 +18,8 @@ on:
 jobs:
   # This workflow contains a single job called "simple deployment pipeline"
   simple_deployment_pipeline:
+    # Why would I want to skip the tests as well
+    # I guess I have to
     if: ${{github.event_name == 'push'}}
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04

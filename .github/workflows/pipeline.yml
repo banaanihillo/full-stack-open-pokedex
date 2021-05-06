@@ -41,8 +41,10 @@ jobs:
   test:
     runs-on: ubuntu-18.04
     steps:
-      - name: Set up node
+      - name: Check repository out
         uses: actions/checkout@v2
+
+      - name: Set up node
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"

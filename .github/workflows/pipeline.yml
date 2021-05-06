@@ -68,6 +68,7 @@ jobs:
 
   bump_version_tag:
     if: ${{github.event_name == 'push'}}
+    steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         env:

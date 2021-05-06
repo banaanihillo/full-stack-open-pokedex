@@ -16,10 +16,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "simple deployment pipeline"
-  simple_deployment_pipeline:
-    # Why would I want to skip the tests as well
-    # I guess I have to
+  # Run on pushes/pull requests to the main branch
+  deploy:
     if: ${{github.event_name == 'push'}}
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04
@@ -40,7 +38,9 @@ jobs:
           checkstring: OK
           rollbackonhealthcheckfailed: true
 
-      # Runs a single command using the runners shell
+  test:
+    runs-on: ubuntu-18.04
+    steps:
       - name: npm install
         run: npm install
         
@@ -65,4 +65,12 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+
+  bump_version_tag:
+    if: ${{github.event_name == 'push'}}
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          DEFAULT_BUMP: patch
 

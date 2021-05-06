@@ -41,9 +41,15 @@ jobs:
   test:
     runs-on: ubuntu-18.04
     steps:
+      - name: Set up node
+        uses: actions/checkout@v2
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
       - name: npm install
         run: npm install
-        
+
       - name: lint
         run: npm run eslint
         

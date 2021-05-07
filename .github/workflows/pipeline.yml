@@ -18,6 +18,7 @@ on:
 jobs:
   # Run on pushes/pull requests to the main branch,
   # skipped if the commit message includes "#skip"
+  # Required for pull requests
   deploy:
     if: |
         github.event_name == 'push'

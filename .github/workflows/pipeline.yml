@@ -86,6 +86,11 @@ jobs:
       }}
     runs-on: ubuntu-18.04
     steps:
+      - name: Check repository out with depth 0
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         env:

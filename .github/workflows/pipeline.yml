@@ -21,7 +21,7 @@ jobs:
     if: >
       ${{
         github.event_name == 'push'
-        && !contains(github.event_head[message], '#skip')
+        && !contains(github.event.head.message, '#skip')
       }}
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04
@@ -82,7 +82,7 @@ jobs:
     if: >
       ${{
         github.event_name == 'push'
-        && !contains(github.event_head[message], '#skip')
+        && !contains(github.event.head.message, '#skip')
       }}
     runs-on: ubuntu-18.04
     steps:
@@ -98,7 +98,7 @@ jobs:
           DEFAULT_BUMP: patch
 
   log_skipped_commit:
-    if: ${{contains(github.event_head[message], '#skip')}}
+    if: ${{contains(github.event.head.message, '#skip')}}
     runs-on: ubuntu-18.04
     steps:
       - name: Check the repository out

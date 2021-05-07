@@ -16,7 +16,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # Run on pushes/pull requests to the main branch
+  # Run on pushes/pull requests to the main branch,
+  # but does #skip do anything?
   deploy:
     if: |
         github.event_name == 'push'

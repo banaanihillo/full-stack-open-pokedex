@@ -21,10 +21,10 @@ jobs:
   deploy:
     if: |
         github.event_name == 'push'
-        && |
-          !contains(github.event.commits[0].message, '#skip')
+        && (!contains(github.event.commits[0].message, '#skip')
           || !contains(github.event.pull_request.title, '#skip')
           || !contains(github.event.pull_request.body, '#skip')
+        )
     # Yup, runs on ubuntu 18.04 alright
     runs-on: ubuntu-18.04
 
@@ -83,10 +83,10 @@ jobs:
   bump_version_tag:
     if: |
         github.event_name == 'push'
-        && |
-          !contains(github.event.commits[0].message, '#skip')
+        && (!contains(github.event.commits[0].message, '#skip')
           || !contains(github.event.pull_request.title, '#skip')
           || !contains(github.event.pull_request.body, '#skip')
+        )
     # Yep, still running on ubuntu 18.04
     runs-on: ubuntu-18.04
     steps:

@@ -100,7 +100,7 @@ jobs:
   log_skipped_commit:
     # Skip the skipping on a pull request,
     # since github.event.commits does not exist
-    if: ${{contains(github.event.commits[0].message, '#skip')}}
+    # if: ${{contains(github.event.commits[0].message, '#skip')}}
     runs-on: ubuntu-18.04
     steps:
       - name: Check the repository out

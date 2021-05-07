@@ -21,7 +21,7 @@ jobs:
     if: >
       ${{
         github.event_name == 'push'
-        && !contains(github.event.head.message, '#skip')
+        && !contains(github.event.commits[0].message, '#skip')
       }}
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04
@@ -82,7 +82,7 @@ jobs:
     if: >
       ${{
         github.event_name == 'push'
-        && !contains(github.event.head.message, '#skip')
+        && !contains(github.event.commits[0].message, '#skip')
       }}
     runs-on: ubuntu-18.04
     steps:
@@ -100,7 +100,7 @@ jobs:
           RELEASE_BRANCHES: main
 
   log_skipped_commit:
-    if: ${{contains(github.event.head.message, '#skip')}}
+    if: ${{contains(github.event.commits[0].message, '#skip')}}
     runs-on: ubuntu-18.04
     steps:
       - name: Check the repository out

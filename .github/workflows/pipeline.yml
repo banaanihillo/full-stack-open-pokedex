@@ -106,15 +106,15 @@ jobs:
       - name: GitHub context
         env:
           GITHUB_CONTEXT: ${{toJson(github)}}
-        run: echo '$GITHUB_CONTEXT'
+        run: echo "$GITHUB_CONTEXT"
       
       - name: Commits
         env:
           COMMITS: ${{toJson(github.event.commits)}}
-        run: echo '#COMMITS'
+        run: echo "$COMMITS"
       
       - name: Commit messages
         env:
           COMMIT_MESSAGES: ${{toJson(github.event.commits.*.message)}}
-        run: echo '$COMMIT_MESSAGES'
+        run: echo "$COMMIT_MESSAGES"
 

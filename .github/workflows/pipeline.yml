@@ -121,13 +121,11 @@ jobs:
       - name: Commit messages
         env:
           COMMIT_MESSAGES: ${{toJson(github.event.commits.*.message)}}
-        run: echo "$COMMIT_MESSAGES"
-      
-      - name: Pull request comment
-        env:
+          # The "commits" property does not exist on pull requests
           COMMIT_TITLE: ${{toJson(github.event.pull_request.title)}}
           COMMIT_BODY: ${{toJson(github.event.pull_request.body)}}
         run: |
+          echo "$COMMIT_MESSAGES"
           echo "$COMMIT_TITLE"
           echo "$COMMIT_BODY"
 

@@ -18,12 +18,10 @@ on:
 jobs:
   # Run on pushes/pull requests to the main branch
   deploy:
-    if: >
-      ${{
+    if: |
         github.event_name == 'push'
         && !contains(github.event.commits[0].message, '#skip')
-      }}
-    # The type of runner that the job will run on
+    # Yup, runs on ubuntu 18.04 alright
     runs-on: ubuntu-18.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -79,11 +77,10 @@ jobs:
           wait-on: http://localhost:5000
 
   bump_version_tag:
-    if: >
-      ${{
+    if: |
         github.event_name == 'push'
         && !contains(github.event.commits[0].message, '#skip')
-      }}
+    # Yep, still running on ubuntu 18.04
     runs-on: ubuntu-18.04
     steps:
       - name: Check repository out with depth 0

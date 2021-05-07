@@ -21,7 +21,10 @@ jobs:
   deploy:
     if: |
         github.event_name == 'push'
-        && !contains(github.event.commits[0].message, '#skip')
+        && |
+          !contains(github.event.commits[0].message, '#skip')
+          || !contains(github.event.pull_request.title, '#skip')
+          || !contains(github.event.pull_request.body, '#skip')
     # Yup, runs on ubuntu 18.04 alright
     runs-on: ubuntu-18.04
 
@@ -80,7 +83,10 @@ jobs:
   bump_version_tag:
     if: |
         github.event_name == 'push'
-        && !contains(github.event.commits[0].message, '#skip')
+        && |
+          !contains(github.event.commits[0].message, '#skip')
+          || !contains(github.event.pull_request.title, '#skip')
+          || !contains(github.event.pull_request.body, '#skip')
     # Yep, still running on ubuntu 18.04
     runs-on: ubuntu-18.04
     steps:
@@ -98,9 +104,10 @@ jobs:
           RELEASE_BRANCHES: main
 
   log_skipped_commit:
-    # Skip the skipping on a pull request,
-    # since github.event.commits does not exist
-    # if: ${{contains(github.event.commits[0].message, '#skip')}}
+    if: |
+      contains(github.event.commits[0].message, '#skip')
+      || contains(github.event.pull_request.title, '#skip')
+      || contains(github.event.pull_request.body, '#skip')
     runs-on: ubuntu-18.04
     steps:
       - name: Check the repository out
@@ -121,4 +128,12 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{toJson(github.event.commits.*.message)}}
         run: echo "$COMMIT_MESSAGES"
+      
+      - name: Pull request comment
+        env:
+          COMMIT_TITLE: ${{toJson(github.event.pull_request.title)}}
+          COMMIT_BODY: ${{toJson(github.event.pull_request.body)}}
+        run: |
+          echo "$COMMIT_TITLE"
+          echo "$COMMIT_BODY"
 

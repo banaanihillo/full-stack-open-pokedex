@@ -97,6 +97,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           DEFAULT_BUMP: patch
           INITIAL_VERSION: '0.0.1'
+          RELEASE_BRANCHES: main
 
   log_skipped_commit:
     if: ${{contains(github.event.head.message, '#skip')}}

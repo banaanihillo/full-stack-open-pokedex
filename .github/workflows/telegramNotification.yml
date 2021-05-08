@@ -1,0 +1,29 @@
+name: Telegram notification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  notify_on_telegram:
+    name: Notify on Telegram
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Send default message
+        # Latest on 2021-05-08
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{secrets.TELEGRAM_TO}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
+      
+      - name: Send success message to myself
+        if: ${{success()}}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{secrets.TELEGRAM_TO_ME}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
+

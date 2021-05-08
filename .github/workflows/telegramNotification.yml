@@ -19,4 +19,11 @@ jobs:
         with:
           to: ${{secrets.TELEGRAM_TO}}
           token: ${{secrets.TELEGRAM_TOKEN}}
+      
+      - name: Send success message to myself
+        if: ${{success()}}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{secrets.TELEGRAM_TO_ME}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
 

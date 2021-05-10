@@ -78,6 +78,14 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       
+      - name: Notify on success
+        if: ${{success()}}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{secrets.TELEGRAM_TO}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
+          message: All good on the ${{github.event_name}}
+      
       - name: Notify on failure
         if: ${{failure()}}
         uses: appleboy/telegram-action@v0.1.1

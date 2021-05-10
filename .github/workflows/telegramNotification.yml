@@ -11,11 +11,16 @@ jobs:
   notify_on_telegram:
     name: Notify on Telegram
     runs-on: ubuntu-18.04
-    Whoops, accidentally succeeded
+    # Wait a second, what am I trying to fail again
     steps:
+      - name: Do something that fails
+        uses: a nonexistent action?
+        with:
+          thing: This is a thing
+      
       - uses: actions/checkout@v2
       - name: Send extended message on failure
-        if: ${{!success()}}
+        if: ${{failure()}}
         # Latest on 2021-05-08
         uses: appleboy/telegram-action@v0.1.1
         with:

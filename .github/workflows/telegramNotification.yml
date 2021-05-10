@@ -11,6 +11,7 @@ jobs:
   notify_on_telegram:
     name: Notify on Telegram
     runs-on: ubuntu-18.04
+    Whoops, accidentally succeeded
     steps:
       - uses: actions/checkout@v2
       - name: Send extended message on failure
@@ -26,6 +27,6 @@ jobs:
         if: ${{success()}}
         uses: appleboy/telegram-action@v0.1.1
         with:
-          to: syntax error${{secrets.TELEGRAM_TO_ME}}
+          to: ${{secrets.TELEGRAM_TO_ME}}
           token: ${{secrets.TELEGRAM_TOKEN}}
 

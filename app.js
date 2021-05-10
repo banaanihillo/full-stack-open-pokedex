@@ -15,5 +15,5 @@ app.get('/health', (_request, response) => {
 })
 
 app.get('/version', (_request, response) => {
-  response.send("This should fail the test/lint step, right")
+  response.send('This no longer uses double quotes')
 })

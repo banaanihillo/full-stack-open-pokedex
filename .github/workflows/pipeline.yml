@@ -86,7 +86,7 @@ jobs:
           to: ${{secrets.TELEGRAM_TO}}
           token: ${{secrets.TELEGRAM_TOKEN}}
           message: |
-            Test failed on a pull request,
+            Test failed on ${{github.event_name}}
             Created at ${{github.event.pull_request.created_at}}
             Updated at ${{github.event.pull_request.updated_at}}
 

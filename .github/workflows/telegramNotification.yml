@@ -13,17 +13,19 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Send default message
+      - name: Send extended message on failure
+        if: ${{!success()}}
         # Latest on 2021-05-08
         uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{secrets.TELEGRAM_TO}}
           token: ${{secrets.TELEGRAM_TOKEN}}
+          message: ${{github.event}}
       
       - name: Send success message to myself
         if: ${{success()}}
         uses: appleboy/telegram-action@v0.1.1
         with:
-          to: ${{secrets.TELEGRAM_TO_ME}}
+          to: syntax error${{secrets.TELEGRAM_TO_ME}}
           token: ${{secrets.TELEGRAM_TOKEN}}
 

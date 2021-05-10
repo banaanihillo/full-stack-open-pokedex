@@ -77,6 +77,26 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      
+      - name: Notify on success
+        if: ${{success()}}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{secrets.TELEGRAM_TO}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
+          message: All good on the ${{github.event_name}}
+      
+      - name: Notify on failure
+        if: ${{failure()}}
+        uses: appleboy/telegram-action@v0.1.1
+        #
+        with:
+          to: ${{secrets.TELEGRAM_TO}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
+          message: |
+            Test failed on ${{github.event_name}}
+            Created at ${{github.event.pull_request.created_at}}
+            Updated at ${{github.event.pull_request.updated_at}}
 
   bump_version_tag:
     if: |
@@ -129,4 +149,5 @@ jobs:
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_TITLE"
           echo "$COMMIT_BODY"
+# Go away, red commit deletion thing
 

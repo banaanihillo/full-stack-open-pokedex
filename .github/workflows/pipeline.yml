@@ -83,11 +83,13 @@ jobs:
         uses: appleboy/telegram-action@v0.1.1
         env:
           GITHUB_EVENT_THINGS: ${{toJson(github.event)}}
-        run: echo "$GITHUB_EVENT_THINGS"
+        # > A step cannot have both the uses and run keys
         with:
           to: ${{secrets.TELEGRAM_TO}}
           token: ${{secrets.TELEGRAM_TOKEN}}
-          message: That message was too long
+          message: |
+            That message was too long
+            echo "$GITHUB_EVENT_THINGS"
 
   bump_version_tag:
     if: |

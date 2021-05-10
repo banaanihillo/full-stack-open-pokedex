@@ -80,16 +80,14 @@ jobs:
       
       - name: Notify on failure
         if: ${{failure()}}
-        uses: appleboy/telegram-action@v0.1.1
+        #uses: appleboy/telegram-action@v0.1.1
         env:
           GITHUB_EVENT_THINGS: ${{toJson(github.event)}}
-        # > A step cannot have both the uses and run keys
-        with:
-          to: ${{secrets.TELEGRAM_TO}}
-          token: ${{secrets.TELEGRAM_TOKEN}}
-          message: |
-            That message was too long
-            echo "$GITHUB_EVENT_THINGS"
+        run: echo "$GITHUB_EVENT_THINGS"
+        #with:
+          #to: ${{secrets.TELEGRAM_TO}}
+          #token: ${{secrets.TELEGRAM_TOKEN}}
+          #message: ${{toJson(github.event)}}
 
   bump_version_tag:
     if: |

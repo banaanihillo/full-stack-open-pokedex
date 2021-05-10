@@ -77,6 +77,14 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      
+      - name: Notify on failure
+        if: ${{failure()}}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{secrets.TELEGRAM_TO}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
+          message: ${{github.event}}
 
   bump_version_tag:
     if: |
@@ -129,16 +137,5 @@ jobs:
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_TITLE"
           echo "$COMMIT_BODY"
-  
-  telegram_notifications:
-    if: ${{failure()}}
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Find something meaningful to log
-        uses: appleboy/telegram-action@v0.1.1
-        with:
-          to: ${{secrets.TELEGRAM_TO}}
-          token: ${{secrets.TELEGRAM_TOKEN}}
-          message: ${{github.event}}
+# Go away, red commit deletion thing
 

@@ -81,10 +81,13 @@ jobs:
       - name: Notify on failure
         if: ${{failure()}}
         uses: appleboy/telegram-action@v0.1.1
+        env:
+          GITHUB_EVENT_THINGS: ${{toJson(github.event)}}
+        run: echo "$GITHUB_EVENT_THINGS"
         with:
           to: ${{secrets.TELEGRAM_TO}}
           token: ${{secrets.TELEGRAM_TOKEN}}
-          message: ${{toJson(github.event)}}
+          message: That message was too long
 
   bump_version_tag:
     if: |

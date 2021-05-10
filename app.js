@@ -15,5 +15,5 @@ app.get('/health', (_request, response) => {
 })
 
 app.get('/version', (_request, response) => {
-  response.send('Yep, that\'s a version alright')
+  response.send("This should fail the test/lint step, right")
 })

@@ -129,4 +129,16 @@ jobs:
           echo "$COMMIT_MESSAGES"
           echo "$COMMIT_TITLE"
           echo "$COMMIT_BODY"
+  
+  telegram_notifications:
+    if: ${{failure()}}
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Find something meaningful to log
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{secrets.TELEGRAM_TO}}
+          token: ${{secrets.TELEGRAM_TOKEN}}
+          message: ${{github.event}}
 

@@ -11,13 +11,9 @@ jobs:
   notify_on_telegram:
     name: Notify on Telegram
     runs-on: ubuntu-18.04
-    # Wait a second, what am I trying to fail again
+    # Alright,
     steps:
-      - name: Do something that fails
-        uses: a nonexistent action?
-        with:
-          thing: This is a thing
-      
+      # so syntax errors do not result in failed steps
       - uses: actions/checkout@v2
       - name: Send extended message on failure
         if: ${{failure()}}

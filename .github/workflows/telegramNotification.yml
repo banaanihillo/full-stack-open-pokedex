@@ -11,23 +11,18 @@ jobs:
   notify_on_telegram:
     name: Notify on Telegram
     runs-on: ubuntu-18.04
-    # Alright,
+
     steps:
-      # so syntax errors do not result in failed steps
+      # 
       - uses: actions/checkout@v2
-      - name: Send extended message on failure
-        if: ${{failure()}}
+      - name: Send default message
         # Latest on 2021-05-08
         uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{secrets.TELEGRAM_TO}}
           token: ${{secrets.TELEGRAM_TOKEN}}
-          message: ${{github.event}}
-      
-      - name: Send success message to myself
-        if: ${{success()}}
-        uses: appleboy/telegram-action@v0.1.1
-        with:
-          to: ${{secrets.TELEGRAM_TO_ME}}
-          token: ${{secrets.TELEGRAM_TOKEN}}
+          args: |
+            ${{github.event_name}} going through the pipeline
+            Created at ${{github.event.pull_request.created_at}}
+            last modified at ${{github.event.pull_request.updated_at}}
 

@@ -88,8 +88,7 @@ jobs:
           message: |
             Test failed on a pull request,
             Created at ${{github.event.pull_request.created_at}}
-            Updated at ${{github.event.pull_reques.updated_at}}
-            
+            Updated at ${{github.event.pull_request.updated_at}}
 
   bump_version_tag:
     if: |
